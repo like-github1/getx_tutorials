@@ -1,69 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:getx_tutorials/Screens/Nextpage.dart';
+import 'package:getx_tutorials/Screens/homepage.dart';
+void main(){
 
-void main() {
-  runApp(
-    myapp(),
-  );
+  
+  runApp(Myapp());
 }
+class Myapp extends StatelessWidget {
+  const Myapp({Key? key}) : super(key: key);
 
-class myapp extends StatefulWidget {
-  myapp({Key? key}) : super(key: key);
-
-  @override
-  State<myapp> createState() => _myappState();
-}
-
-class _myappState extends State<myapp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: "Snackbar using GetX",
+      title: "Named Route Using Getx Librery",
+      initialRoute: "/",
+      defaultTransition: Transition.zoom,
+      getPages: [
+        GetPage(name: "/", page:()=> Myapp(),
+         transition: Transition.zoom,
+        ),
+        GetPage(name: "/homepage", page: ()=>homepage()),
+        GetPage(name: "/NextPage", page: ()=>NextPage()),
+       
+      ],
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("Snackbar"),
+        appBar: AppBar(title: Text("Named route using Getx Librery"),
+        
         ),
         body: Container(
-          child: Center(
-            child: ElevatedButton(
-                onPressed: () {
-                  Get.snackbar(
-                    "snakbar Text", 
-                    "Snackbar Messages",
-                    titleText: const Text(
-                      "this is Snakbar",
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                    messageText: const Text("this is message text"),
-                    colorText: Colors.red,
-                    backgroundColor: Colors.pink,
-                    snackPosition: SnackPosition.BOTTOM,
-                    borderRadius: 2,
-                    margin: const EdgeInsets.all(3),
-                    backgroundGradient: const LinearGradient(colors: [
-                      Colors.red,Colors.blue,
-                    ]),
-                    isDismissible: true,
-                    dismissDirection: DismissDirection.horizontal,
-                    forwardAnimationCurve: Curves.bounceInOut,
-                    //add like leadding icon on Snackbar
-                    icon: Icon(Icons.send, color: Colors.blue,),
-                    shouldIconPulse: false,
-                    //add Trailing Icon on SnackBar
-                    mainButton: TextButton(onPressed: (){}, child: Text("send")),
-                    onTap: (Value){
-                      print("SnackBar is Clicked");
+          child: ElevatedButton(onPressed: (){
+            Get.toNamed(
+             
+            "/homepage ? channels=this is data pass to homepage & content= this is content data too"
+          
+            );
 
-                    }
-
-
-                    );
-                },
-                child: const Text("Show SnackBar")),
-          ),
-        ),
+          }, child: Text("Go to home page")),
+        )
       ),
     );
   }
