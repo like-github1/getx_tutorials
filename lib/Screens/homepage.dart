@@ -9,7 +9,7 @@ class homepage extends StatelessWidget {
           child: ElevatedButton(onPressed: (){
             Get.toNamed(
          
-            "/NextPage? channels=this next page & content= Next data "
+            "/nextpage? channels=this next page & content= Next data "
           
             );
 
