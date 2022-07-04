@@ -29,37 +29,7 @@ class _myappState extends State<myapp> {
           child: Center(
             child: ElevatedButton(
                 onPressed: () {
-                  Get.snackbar(
-                    "snakbar Text", 
-                    "Snackbar Messages",
-                    titleText: const Text(
-                      "this is Snakbar",
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                    messageText: const Text("this is message text"),
-                    colorText: Colors.red,
-                    backgroundColor: Colors.pink,
-                    snackPosition: SnackPosition.BOTTOM,
-                    borderRadius: 2,
-                    margin: const EdgeInsets.all(3),
-                    backgroundGradient: const LinearGradient(colors: [
-                      Colors.red,Colors.blue,
-                    ]),
-                    isDismissible: true,
-                    dismissDirection: DismissDirection.horizontal,
-                    forwardAnimationCurve: Curves.bounceInOut,
-                    //add like leadding icon on Snackbar
-                    icon: Icon(Icons.send, color: Colors.blue,),
-                    shouldIconPulse: false,
-                    //add Trailing Icon on SnackBar
-                    mainButton: TextButton(onPressed: (){}, child: Text("send")),
-                    onTap: (Value){
-                      print("SnackBar is Clicked");
-
-                    }
-
-
-                    );
+                
                 },
                 child: const Text("Show SnackBar")),
           ),
