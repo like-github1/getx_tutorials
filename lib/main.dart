@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+
+import 'package:getx_tutorials/getxController.dart';
 
 void main() {
   runApp(
@@ -11,12 +11,14 @@ void main() {
 
 class myapp extends StatefulWidget {
   myapp({Key? key}) : super(key: key);
+ 
 
   @override
   State<myapp> createState() => _myappState();
 }
 
 class _myappState extends State<myapp> {
+   Mycontroller icontroller=Get.put(Mycontroller());
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -26,12 +28,23 @@ class _myappState extends State<myapp> {
           title: Text("Snackbar"),
         ),
         body: Container(
-          child: Center(
-            child: ElevatedButton(
-                onPressed: () {
-                
-                },
-                child: const Text("Show SnackBar")),
+          child: Column(
+            children: [
+               GetBuilder<Mycontroller>(
+                     
+                      builder: (controller){
+                        return Text("this is your data ${icontroller.count}");
+
+                      }
+                      ),
+              ElevatedButton(
+                onPressed: (){
+                  Get.find<Mycontroller>().increment();
+                  icontroller.increment();
+                }, 
+                child: Text("incress"),
+                )
+            ],
           ),
         ),
       ),
