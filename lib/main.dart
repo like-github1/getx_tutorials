@@ -2,66 +2,46 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:getx_tutorials/Getx_controller.dart';
 
 void main() {
   runApp(
-    myapp(),
+    Myapp(),
   );
 }
+class Myapp extends StatelessWidget {
+   Myapp({Key? key}) : super(key: key);
+   //if init is not used in Getx Bulder
+  Controller mycontroller= Get.put(Controller());
 
-class myapp extends StatefulWidget {
-  myapp({Key? key}) : super(key: key);
-
-  @override
-  State<myapp> createState() => _myappState();
-}
-
-class _myappState extends State<myapp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: "Snackbar using GetX",
+      title: "Getx Controller Using ",
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("Snackbar"),
+        appBar: AppBar(title: Text("ReactiveStae Manager Using Getx_Controller Type"),
+      
         ),
-        body: Container(
-          child: Center(
-            child: ElevatedButton(
-                onPressed: () {
-                  Get.snackbar(
-                    "snakbar Text", 
-                    "Snackbar Messages",
-                    titleText: const Text(
-                      "this is Snakbar",
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                    messageText: const Text("this is message text"),
-                    colorText: Colors.red,
-                    backgroundColor: Colors.pink,
-                    snackPosition: SnackPosition.BOTTOM,
-                    borderRadius: 2,
-                    margin: const EdgeInsets.all(3),
-                    backgroundGradient: const LinearGradient(colors: [
-                      Colors.red,Colors.blue,
-                    ]),
-                    isDismissible: true,
-                    dismissDirection: DismissDirection.horizontal,
-                    forwardAnimationCurve: Curves.bounceInOut,
-                    //add like leadding icon on Snackbar
-                    icon: Icon(Icons.send, color: Colors.blue,),
-                    shouldIconPulse: false,
-                    //add Trailing Icon on SnackBar
-                    mainButton: TextButton(onPressed: (){}, child: Text("send")),
-                    onTap: (Value){
-                      print("SnackBar is Clicked");
-
-                    }
-
-
-                    );
-                },
-                child: const Text("Show SnackBar")),
+        body: Center(
+          child: Column(
+            children: [
+              // Obx(()=>Text("this your name ${mycontroller.users.name.value}"))
+              GetX<Controller>(
+               // init: Controller(),//this Create an Instance of Controller and Initialize it
+                builder: (Controller){
+                  return Text("the value of this Controller is ${mycontroller.count}");
+                  
+                }
+                ),
+                ElevatedButton(
+                  onPressed: (){
+                   // Get.find<Controller>().increment();
+                   mycontroller.increment();
+                  }
+                , child: Text("Increment "),
+                )
+              
+            ],
           ),
         ),
       ),
