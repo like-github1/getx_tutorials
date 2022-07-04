@@ -1,68 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:getx_tutorials/controller.dart';
 
 void main() {
-  runApp(
-    myapp(),
-  );
+  runApp(Myapp());
 }
 
-class myapp extends StatefulWidget {
-  myapp({Key? key}) : super(key: key);
+class Myapp extends StatelessWidget {
+  Myapp({Key? key}) : super(key: key);
+  final mycontroller _controller = Get.put(mycontroller());
 
-  @override
-  State<myapp> createState() => _myappState();
-}
-
-class _myappState extends State<myapp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: "Snackbar using GetX",
+      title: "GetX_Controller",
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Snackbar"),
+          title: Text("Getx_Controller"),
         ),
-        body: Container(
-          child: Center(
-            child: ElevatedButton(
-                onPressed: () {
-                  Get.snackbar(
-                    "snakbar Text", 
-                    "Snackbar Messages",
-                    titleText: const Text(
-                      "this is Snakbar",
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                    messageText: const Text("this is message text"),
-                    colorText: Colors.red,
-                    backgroundColor: Colors.pink,
-                    snackPosition: SnackPosition.BOTTOM,
-                    borderRadius: 2,
-                    margin: const EdgeInsets.all(3),
-                    backgroundGradient: const LinearGradient(colors: [
-                      Colors.red,Colors.blue,
-                    ]),
-                    isDismissible: true,
-                    dismissDirection: DismissDirection.horizontal,
-                    forwardAnimationCurve: Curves.bounceInOut,
-                    //add like leadding icon on Snackbar
-                    icon: Icon(Icons.send, color: Colors.blue,),
-                    shouldIconPulse: false,
-                    //add Trailing Icon on SnackBar
-                    mainButton: TextButton(onPressed: (){}, child: Text("send")),
-                    onTap: (Value){
-                      print("SnackBar is Clicked");
-
-                    }
-
-
-                    );
-                },
-                child: const Text("Show SnackBar")),
-          ),
+        body: Column(
+          children: [
+            Obx(() => Text("the name is ${_controller.students.value.name}")),
+            ElevatedButton(
+              onPressed: () {
+                _controller.converttouppercase();
+              },
+              child:const  Text("Upper"),
+            )
+          ],
         ),
       ),
     );
