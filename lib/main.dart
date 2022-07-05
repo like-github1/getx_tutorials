@@ -1,49 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 
-import 'package:getx_tutorials/getxController.dart';
+import 'getxController.dart';
 
 void main() {
-  runApp(
-    myapp(),
-  );
+  runApp(Myapp());
 }
 
-class myapp extends StatefulWidget {
-  myapp({Key? key}) : super(key: key);
- 
+class Myapp extends StatelessWidget {
+  const Myapp({Key? key}) : super(key: key);
 
-  @override
-  State<myapp> createState() => _myappState();
-}
-
-class _myappState extends State<myapp> {
-   Mycontroller icontroller=Get.put(Mycontroller());
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: "Snackbar using GetX",
+      title: "Simple State Manager",
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Snackbar"),
+          title: Text("simple State manager"),
         ),
-        body: Container(
+        body: Center(
           child: Column(
             children: [
-               GetBuilder<Mycontroller>(
-                     
-                      builder: (controller){
-                        return Text("this is your data ${icontroller.count}");
-
-                      }
-                      ),
-              ElevatedButton(
-                onPressed: (){
-                  Get.find<Mycontroller>().increment();
-                  icontroller.increment();
-                }, 
-                child: Text("incress"),
-                )
+              GetBuilder<Getcontroller>(
+                  init: Getcontroller(),
+                  builder: (controller) {
+                    return Text("the cont value is ${controller.count}");
+                  }),
+              ElevatedButton(onPressed: () {}, child: const Text("Increment"))
             ],
           ),
         ),
