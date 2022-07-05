@@ -9,7 +9,8 @@ void main() {
 }
 
 class Myapp extends StatelessWidget {
-  const Myapp({Key? key}) : super(key: key);
+  Myapp({Key? key}) : super(key: key);
+  Getcontroller mcontroller = Get.put(Getcontroller());
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +24,15 @@ class Myapp extends StatelessWidget {
           child: Column(
             children: [
               GetBuilder<Getcontroller>(
-                  init: Getcontroller(),
+               init: Getcontroller(),
                   builder: (controller) {
                     return Text("the cont value is ${controller.count}");
                   }),
-              ElevatedButton(onPressed: () {}, child: const Text("Increment"))
+              ElevatedButton(
+                  onPressed: () {
+                    Get.find<Getcontroller>().increment();
+                  },
+                  child: const Text("Increment"))
             ],
           ),
         ),
